@@ -1,0 +1,4 @@
+-r requirements.txt
+nbformat>=5.10,<6
+ipython>=8,<10
+lxml>=5,<7

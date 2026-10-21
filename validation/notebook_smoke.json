@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "total_cells": 43,
+  "executed_code_cells": 30,
+  "cell_indices": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    25,
+    26,
+    29,
+    30,
+    32,
+    34,
+    37,
+    38,
+    40
+  ],
+  "models": [
+    "convnext_tiny",
+    "efficientnet_v2_s"
+  ],
+  "data": "synthetic TIFF fixture",
+  "pretrained": false,
+  "device": "cpu",
+  "epochs_per_model": 1,
+  "train_size": 64,
+  "eval_sizes": [
+    64,
+    96
+  ],
+  "submission_rows": 7,
+  "competition_accuracy": null,
+  "seconds": 14.763941204000048
+}

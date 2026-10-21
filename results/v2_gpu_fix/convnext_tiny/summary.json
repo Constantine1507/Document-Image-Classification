@@ -1,0 +1,12 @@
+{
+  "model": "convnext_tiny",
+  "completed_epoch": 20,
+  "planned_epochs": 20,
+  "best_validation_accuracy": 0.8743742177722152,
+  "best_validation_log_loss": 0.5667495460092473,
+  "finished": true,
+  "early_stopped": false,
+  "score_type": "model-selection holdout; not independent final test / Kaggle score",
+  "public_score": null,
+  "private_score": null
+}

@@ -1,0 +1,4 @@
+model,accuracy,macro_f1,log_loss
+ensemble_equal,0.88423,0.884022,0.487083
+convnext_tiny,0.874374,0.874207,0.56675
+efficientnet_v2_s,0.873123,0.872812,0.597911

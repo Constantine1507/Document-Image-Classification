@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "fixture": "synthetic TIFF images, 3 classes; real data not available",
+  "checks": [
+    "direct files without modification/copy",
+    "ZIP streaming without extraction",
+    "cached audit without re-decoding",
+    "corrupt training quarantine",
+    "conflicting-label quarantine",
+    "duplicate-group split isolation",
+    "train/test overlap report",
+    "leading-zero ID preservation",
+    "submission reorder by ID",
+    "checkpoint resume equals uninterrupted CPU run",
+    "reject mismatched resume",
+    "TTA selection/evaluation/submission pipeline",
+    "two-model probability ensemble and selection",
+    "short-tail gradient accumulation equals full batch"
+  ],
+  "architecture_smoke_tests": [
+    {
+      "model": "convnext_tiny",
+      "output_shape": [
+        2,
+        16
+      ],
+      "finite_loss": true
+    },
+    {
+      "model": "efficientnet_v2_s",
+      "output_shape": [
+        2,
+        16
+      ],
+      "finite_loss": true
+    }
+  ],
+  "torch": "2.8.0+cpu",
+  "competition_accuracy": null
+}

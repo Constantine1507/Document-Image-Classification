@@ -1,0 +1,31 @@
+{
+  "notebook": "notebooks/executed/v2_gpu_fix_kaggle.ipynb",
+  "sha256": "1af2fc26eabea894bfec9dbb18884ee8678b510ace3ee783927cfd34fdccb758",
+  "recorded_epochs_per_model": 20,
+  "best_ema_epochs": {
+    "convnext_tiny": 18,
+    "efficientnet_v2_s": 16
+  },
+  "selected_eval_sizes": {
+    "convnext_tiny": [
+      384
+    ],
+    "efficientnet_v2_s": [
+      384
+    ]
+  },
+  "selected_eval_sizes_evidence": "Only 384px test inference appears in cell 25 logs",
+  "comparison_precision": "Six decimals displayed by the executed notebook",
+  "submission_shape_recorded": [
+    7994,
+    2
+  ],
+  "limitations": [
+    "No checkpoints or complete submission CSV supplied",
+    "No raw prediction probabilities supplied",
+    "Clean-train diagnostic file was not printed in the notebook",
+    "Notebook metadata predates its recorded completed training output",
+    "This archive predates the maintained v2.2 source; its outputs were not rerun"
+  ],
+  "gpu_diagnostics_log": "PyTorch: 2.11.0+cu128\nCUDA build: 12.8\ncuDNN: 91900\nGPU: Tesla T4\nCompute capability: (7, 5)\nBF16 native: False\nAMP: FP16 + GradScaler\nVRAM tersedia: 14.46/14.56 GiB\nRUN_TAG: v2_gpu_fix\nPatch selesai. Jalankan kembali sel RUN_DIRS/training.\n"
+}

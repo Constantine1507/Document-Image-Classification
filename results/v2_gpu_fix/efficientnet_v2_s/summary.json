@@ -1,0 +1,12 @@
+{
+  "model": "efficientnet_v2_s",
+  "completed_epoch": 20,
+  "planned_epochs": 20,
+  "best_validation_accuracy": 0.8731226533166458,
+  "best_validation_log_loss": 0.5979109662471934,
+  "finished": true,
+  "early_stopped": false,
+  "score_type": "model-selection holdout; not independent final test / Kaggle score",
+  "public_score": null,
+  "private_score": null
+}

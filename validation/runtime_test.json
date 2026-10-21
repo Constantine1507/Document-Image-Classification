@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "policy_checks": "CPU and mocked CUDA capability",
+  "actual_kernel_probe": {
+    "status": "skipped",
+    "reason": "CUDA unavailable; GPU kernels were not tested"
+  }
+}

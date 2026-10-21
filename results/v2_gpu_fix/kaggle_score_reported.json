@@ -1,0 +1,9 @@
+{
+  "model": "ensemble_equal",
+  "score": 0.88456,
+  "source": "reported by repository owner in the project conversation",
+  "independently_verified": false,
+  "leaderboard_split": null,
+  "rank": null,
+  "submission_sha256": null
+}
