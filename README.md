@@ -4,10 +4,24 @@ Tugas 2 Supervised Machine Learning — Constantine Calvin Gosal Jo, 5052241010.
 Klasifikasi 16 jenis dokumen menggunakan **PyTorch**, **ConvNeXt Tiny**, dan
 **EfficientNetV2-S**. Kedua model di-fine-tune dari bobot ImageNet-1K torchvision.
 
-**Model terpilih: ensemble probabilitas 50:50.** Pada holdout yang sama, ensemble
-mencapai **validation accuracy 0,884230**. Skor Kaggle yang dilaporkan adalah
-**0,88456**; angka Kaggle tersebut dicatat terpisah karena tidak berasal dari
-output evaluasi lokal dan jenis leaderboard-nya belum didokumentasikan.
+**Submission terbaru: geometric mean 50:50 — skor Kaggle dilaporkan 0,88582**
+(pembaruan 28 Oktober 2026). Unduh
+[submission_geometric_088582.csv](submissions/submission_geometric_088582.csv).
+Akurasi validasi lokalnya **0,885325 (5.659/6.392)**. Skor Kaggle berasal dari
+laporan pemilik repository; jenis leaderboard dan peringkat belum diberikan.
+
+Baseline arithmetic mean 50:50 tetap tersedia dengan validation accuracy
+**0,884230** dan skor Kaggle yang dilaporkan **0,88456**. Kenaikan skor Kaggle
+adalah **0,00126 atau 0,126 poin persentase**. Ini pembaruan pooling probabilitas
+CNN yang sudah dilatih, bukan hasil training ulang backbone. Target 0,90 belum
+tercapai. Lihat [riwayat CSV](submissions/README.md),
+[manifest identitas](submissions/manifest.json), dan
+[pipeline lengkap beserta diagram](docs/PIPELINE_FLOW.md).
+
+| Versi | Validation accuracy | Skor Kaggle dilaporkan | Status |
+|---|---:|---:|---|
+| Arithmetic mean 50:50 | 0,884230 | 0,88456 | Baseline dipertahankan |
+| **Geometric mean 50:50** | **0,885325** | **0,88582** | Submission terbaru |
 
 ## Notebook utama dan bukti hasil
 
@@ -17,14 +31,17 @@ output evaluasi lokal dan jenis leaderboard-nya belum didokumentasikan.
 | [v2_gpu_fix_kaggle.ipynb](notebooks/executed/v2_gpu_fix_kaggle.ipynb) | Notebook asli yang sudah dieksekusi: audit, 20 epoch per model, evaluasi dan ensemble |
 | [results/v2_gpu_fix](results/v2_gpu_fix) | History lengkap, metrik, laporan per kelas, kurva dan confusion matrix dari output notebook asli |
 | [evidence_manifest.json](results/v2_gpu_fix/evidence_manifest.json) | Sumber bukti, hash notebook asli, epoch terpilih dan batasan data yang tersedia |
+| [results/refinement_20261027](results/refinement_20261027) | Hasil tiga putaran iterasi probabilitas, pemeriksaan independen, dan pembaruan skor Kaggle |
+| [PIPELINE_FLOW.md](docs/PIPELINE_FLOW.md) | Diagram dari audit sampai submission serta cara reproduksi CSV terbaru |
 
 Arsip eksekusi dipertahankan utuh. Metadata lama di dalam arsip masih menulis
 `competition_training_executed: false`, tetapi output sel memperlihatkan training
 dan evaluasi selesai. Penilaian hasil mengikuti log eksekusi dan metrik tersebut.
 Source v2.2 menambahkan dokumentasi, diagnostik GPU, ekspor hasil dan pemeriksaan
-konsistensi. **Output historis tidak disalin sebagai output hasil run v2.2.**
+konsistensi. Pembaruan notebook menambahkan tahap 6b untuk menghasilkan CSV
+geometric terpisah; notebook eksekusi historis tetap utuh. **Output historis tidak disalin sebagai output hasil run v2.2.**
 
-## Hasil eksperimen yang tercatat
+## Hasil training baseline yang tercatat
 
 Split: **25.567 train / 6.392 validasi**, seed 42. Perbandingan ditampilkan sesuai
 presisi enam desimal pada notebook; metrik model tunggal dengan presisi penuh
@@ -64,7 +81,10 @@ melalui validasi, tetapi bukan kebijakan yang terpilih pada run ini.
 - `train_soft_accuracy` memakai augmentasi, label smoothing/mixup dan bobot
   training, sedangkan validasi memakai EMA. Angkanya tidak dapat diperlakukan
   sebagai clean train–validation gap. File diagnostik clean-train tidak
-  dicetak pada arsip, sehingga gap clean-train historis tidak direka.
+  dicetak pada arsip notebook awal. Arsip review yang kemudian tersedia memuat
+  evaluasi sampel clean-train 2.048 gambar: ConvNeXt 1,000 dan EfficientNet
+  0,999023. Bukti tambahan dan keterbatasannya dicatat di
+  [laporan refinement](results/refinement_20261027/HASIL_ITERASI_RVL_CDIP.md).
 - Epoch, resolusi, dan kandidat akhir dipilih memakai holdout yang sama.
   Accuracy tersebut adalah **skor seleksi**, bukan estimasi test independen.
 
@@ -116,7 +136,9 @@ berkas yang tidak berubah. Training tetap memerlukan pembacaan minibatch.
    mengaudit data, membuat split, melatih model, mengevaluasi dan membuat CSV.
 4. Gunakan `RUN_TAG` baru untuk perubahan hyperparameter/source. Default v2.2
    terpisah dari run historis `v2_gpu_fix`.
-5. Unduh `submission.csv`, `submission_manifest.json`, dan `github_results.zip`.
+5. Unduh `submission_geometric.csv` dari tahap 6b untuk pooling terbaru.
+   `submission.csv` dan `submission_manifest.json` tetap memuat pilihan dari
+   perbandingan baseline. Unduh juga `github_results.zip`.
    Arsip terakhir berisi README dan hasil agregat untuk memperbarui GitHub.
 6. **Save Version** dengan output sebelum sesi berakhir. `best.pt` dan `last.pt`
    ada di `outputs/<run_name>/`; keduanya tidak dimasukkan ke GitHub.
@@ -172,6 +194,10 @@ besar. [Metodologi lengkap](docs/METHODOLOGY.md) menjelaskan alasan dan batasann
 | Direktori/berkas | Isi |
 |---|---|
 | `src/docvision_v2/` | Data, model, training, evaluasi, runtime, ekspor laporan |
+| `src/docvision_calibration/` | Pooling geometric, kalibrasi neural dan nested group CV |
+| `configs/refinement/` | Rencana tiga putaran eksperimen yang sudah dijalankan |
+| `submissions/` | CSV baseline dan terbaru, hash serta riwayat skor |
+| `results/refinement_20261027/` | Bukti iterasi dan catatan skor yang dilaporkan 28 Oktober |
 | `configs/` | Konfigurasi kedua arsitektur |
 | `scripts/` | CLI, pembangun notebook, ekstraksi bukti dan validator |
 | `notebooks/` | Notebook run baru dan arsip eksekusi asli |
@@ -193,11 +219,26 @@ arsitektur, resume setara uninterrupted run, gradient accumulation dengan
 batch terakhir pendek, TIFF/ZIP, ID submission dan ensemble. Pengujian CPU
 tidak menggantikan pengujian training penuh di Kaggle.
 
-**Bobot checkpoint, probabilitas lengkap dan CSV submission historis belum
-disertakan.** Lima baris preview dan skor tidak cukup untuk merekonstruksi
-7.994 prediksi asli. Untuk mereproduksi berkas historis secara persis diperlukan
-output Kaggle tersimpan. Menjalankan notebook baru akan menghasilkan run baru;
-hasil CUDA tidak dijanjikan identik bit demi bit antarmesin/versi.
+**CSV baseline dan submission terbaru kini disertakan di `submissions/`.**
+Hash dan seluruh ID telah diperiksa. Bobot checkpoint dan probabilitas lengkap
+masih disediakan di luar Git. Reproduksi CSV terbaru secara persis menggunakan
+arsip `docvision_v2_review.zip` asli, tanpa memerlukan gambar 4 GB atau training
+ulang. [Panduan reproduksi](docs/PIPELINE_FLOW.md) membedakan jalur arsip asli
+tersebut dari inferensi hasil run baru. Menjalankan training baru menghasilkan
+run baru; hasil CUDA tidak dijanjikan identik bit demi bit antarmesin/versi.
+
+```bash
+python scripts/verify_submissions.py
+python -m pip install -r requirements-refinement.txt
+python scripts/finalize_submission.py --review-zip /path/to/docvision_v2_review.zip --output outputs/reproduced_final
+```
+
+Dua putaran korektor terlatih tidak memperbaiki nested CV secara stabil.
+Geometric mean tetap dipilih setelah perbandingan eksploratif; hasil akhir
+memperbaiki 27 kesalahan validasi sekaligus merusak 20 prediksi benar, bersih +7.
+Seluruh label test berasal dari inferensi; 97 label berbeda dari baseline.
+Skor 0,88582 dicatat pada file yang hash-nya dikenal, bukan dipasang otomatis
+pada setiap hasil reproduksi/training baru.
 
 Ekstraksi bukti dapat diulang dengan `python scripts/extract_run_evidence.py`.
 Notebook dapat dibangun ulang dengan `python scripts/build_notebook.py`;

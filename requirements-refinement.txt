@@ -1,0 +1,3 @@
+-r requirements.txt
+# Additional diagnostic statistics for probability refinement.
+scipy>=1.10

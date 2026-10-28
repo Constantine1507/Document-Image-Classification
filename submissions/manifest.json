@@ -1,0 +1,52 @@
+{
+  "latest_submission": "submission_geometric_088582.csv",
+  "updated_on": "2026-10-28",
+  "test_id_order": "same as submission.csv in the original review archive",
+  "base_models": [
+    "convnext_tiny",
+    "efficientnet_v2_s"
+  ],
+  "review_archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+  "changed_test_labels_latest_vs_baseline": 97,
+  "submissions": [
+    {
+      "version": "baseline",
+      "file": "submission_ensemble_equal_088456.csv",
+      "method": "arithmetic_mean_50_50",
+      "rows": 7994,
+      "columns": [
+        "id",
+        "label"
+      ],
+      "label_min": 0,
+      "label_max": 15,
+      "sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+      "validation_accuracy": 0.8842302878598248,
+      "validation_correct": 5652,
+      "validation_rows": 6392,
+      "reported_kaggle_score": 0.88456,
+      "kaggle_score_independently_verified": false,
+      "leaderboard_split": null
+    },
+    {
+      "version": "latest",
+      "file": "submission_geometric_088582.csv",
+      "method": "geometric_mean_50_50",
+      "rows": 7994,
+      "columns": [
+        "id",
+        "label"
+      ],
+      "label_min": 0,
+      "label_max": 15,
+      "sha256": "812d1b43a69b2cfc5875f8930a38db54b6e33c2db259dc4252a873882d35afa1",
+      "validation_accuracy": 0.8853254067584481,
+      "validation_correct": 5659,
+      "validation_rows": 6392,
+      "reported_kaggle_score": 0.88582,
+      "kaggle_score_independently_verified": false,
+      "leaderboard_split": null
+    }
+  ],
+  "score_note": "Kaggle scores are reported by the repository owner; validation metrics are computed locally. The 0.88582 report is associated with the latest primary submission in the conversation."
+}

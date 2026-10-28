@@ -1,0 +1,382 @@
+{
+  "candidate": "power_plateau",
+  "accuracy": 0.8851689612015019,
+  "correct": 5658,
+  "macro_f1": 0.8848985968383506,
+  "log_loss": 0.4986042675422168,
+  "paired": {
+    "recovered": 33,
+    "broken": 27,
+    "net_correct_gain": 6,
+    "still_wrong": 707,
+    "descriptive_95pct_delta_interval": [
+      -0.0012515644555694619,
+      0.0032843419019502533
+    ],
+    "mcnemar_exact_p_descriptive": 0.5189580031896519,
+    "inference_limitation": "Descriptive only; shared base-model selection and overlapping CV training sets limit formal inference."
+  },
+  "choices": [
+    {
+      "fold": 0,
+      "parameter_indices": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        26,
+        45,
+        50,
+        55,
+        56,
+        60,
+        61,
+        65,
+        66,
+        70,
+        71,
+        75,
+        76,
+        80,
+        81
+      ],
+      "parameters": [
+        {
+          "weight": 0.3,
+          "power": -1.0
+        },
+        {
+          "weight": 0.325,
+          "power": -1.0
+        },
+        {
+          "weight": 0.35,
+          "power": -1.0
+        },
+        {
+          "weight": 0.375,
+          "power": -1.0
+        },
+        {
+          "weight": 0.4,
+          "power": -1.0
+        },
+        {
+          "weight": 0.425,
+          "power": 0.0
+        },
+        {
+          "weight": 0.525,
+          "power": -1.0
+        },
+        {
+          "weight": 0.55,
+          "power": -1.0
+        },
+        {
+          "weight": 0.575,
+          "power": -1.0
+        },
+        {
+          "weight": 0.575,
+          "power": 0.0
+        },
+        {
+          "weight": 0.6,
+          "power": -1.0
+        },
+        {
+          "weight": 0.6,
+          "power": 0.0
+        },
+        {
+          "weight": 0.625,
+          "power": -1.0
+        },
+        {
+          "weight": 0.625,
+          "power": 0.0
+        },
+        {
+          "weight": 0.65,
+          "power": -1.0
+        },
+        {
+          "weight": 0.65,
+          "power": 0.0
+        },
+        {
+          "weight": 0.675,
+          "power": -1.0
+        },
+        {
+          "weight": 0.675,
+          "power": 0.0
+        },
+        {
+          "weight": 0.7,
+          "power": -1.0
+        },
+        {
+          "weight": 0.7,
+          "power": 0.0
+        }
+      ],
+      "assessment_accuracy": 0.8881939014855356,
+      "baseline_accuracy": 0.8897576231430805
+    },
+    {
+      "fold": 1,
+      "parameter_indices": [
+        10,
+        15,
+        45,
+        50,
+        66,
+        71,
+        76,
+        80
+      ],
+      "parameters": [
+        {
+          "weight": 0.35,
+          "power": -1.0
+        },
+        {
+          "weight": 0.375,
+          "power": -1.0
+        },
+        {
+          "weight": 0.525,
+          "power": -1.0
+        },
+        {
+          "weight": 0.55,
+          "power": -1.0
+        },
+        {
+          "weight": 0.625,
+          "power": 0.0
+        },
+        {
+          "weight": 0.65,
+          "power": 0.0
+        },
+        {
+          "weight": 0.675,
+          "power": 0.0
+        },
+        {
+          "weight": 0.7,
+          "power": -1.0
+        }
+      ],
+      "assessment_accuracy": 0.8849765258215962,
+      "baseline_accuracy": 0.8857589984350548
+    },
+    {
+      "fold": 2,
+      "parameter_indices": [
+        0,
+        10,
+        15,
+        20,
+        45,
+        50
+      ],
+      "parameters": [
+        {
+          "weight": 0.3,
+          "power": -1.0
+        },
+        {
+          "weight": 0.35,
+          "power": -1.0
+        },
+        {
+          "weight": 0.375,
+          "power": -1.0
+        },
+        {
+          "weight": 0.4,
+          "power": -1.0
+        },
+        {
+          "weight": 0.525,
+          "power": -1.0
+        },
+        {
+          "weight": 0.55,
+          "power": -1.0
+        }
+      ],
+      "assessment_accuracy": 0.8944487881157154,
+      "baseline_accuracy": 0.890539483971853
+    },
+    {
+      "fold": 3,
+      "parameter_indices": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        31,
+        36,
+        50,
+        60
+      ],
+      "parameters": [
+        {
+          "weight": 0.3,
+          "power": -1.0
+        },
+        {
+          "weight": 0.325,
+          "power": -1.0
+        },
+        {
+          "weight": 0.35,
+          "power": -1.0
+        },
+        {
+          "weight": 0.375,
+          "power": -1.0
+        },
+        {
+          "weight": 0.4,
+          "power": -1.0
+        },
+        {
+          "weight": 0.425,
+          "power": -1.0
+        },
+        {
+          "weight": 0.45,
+          "power": -1.0
+        },
+        {
+          "weight": 0.45,
+          "power": 0.0
+        },
+        {
+          "weight": 0.475,
+          "power": 0.0
+        },
+        {
+          "weight": 0.55,
+          "power": -1.0
+        },
+        {
+          "weight": 0.6,
+          "power": -1.0
+        }
+      ],
+      "assessment_accuracy": 0.8779342723004695,
+      "baseline_accuracy": 0.877151799687011
+    },
+    {
+      "fold": 4,
+      "parameter_indices": [
+        10,
+        15,
+        61
+      ],
+      "parameters": [
+        {
+          "weight": 0.35,
+          "power": -1.0
+        },
+        {
+          "weight": 0.375,
+          "power": -1.0
+        },
+        {
+          "weight": 0.6,
+          "power": 0.0
+        }
+      ],
+      "assessment_accuracy": 0.8802816901408451,
+      "baseline_accuracy": 0.8779342723004695
+    }
+  ],
+  "scope": "Third exploratory round: only two global ensemble parameters are optimized. For each outer fold, parameters or a four-row near-optimal plateau are selected using outer-training labels only. Base CNN selection and adaptive experiment design still used this validation set.",
+  "kaggle_score": null,
+  "data_provenance": {
+    "archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+    "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+    "class_names": [
+      "advertisement",
+      "budget",
+      "email",
+      "file_folder",
+      "form",
+      "handwritten",
+      "invoice",
+      "letter",
+      "memo",
+      "news_article",
+      "presentation",
+      "questionnaire",
+      "resume",
+      "scientific_publication",
+      "scientific_report",
+      "specification"
+    ],
+    "member_names": [
+      "convnext_tiny",
+      "efficientnet_v2_s"
+    ],
+    "validation_rows": 6392,
+    "validation_unique_groups": 6390,
+    "test_rows": 7994,
+    "baseline_correct": 5652,
+    "baseline_accuracy": 0.8842302878598248,
+    "baseline_submission_sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+    "backbone_metadata": [
+      {
+        "model": "convnext_tiny",
+        "epoch": 18,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "c303dcd191b8e6a21b85c782fd0f29d3656d7a2e58d1b127dac7ab968cb34cdf",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8743742177722152,
+          "macro_f1": 0.8742072464678626,
+          "log_loss": 0.5667495460092473,
+          "unique_image_group_accuracy": 0.874491392801252,
+          "correct": 5589,
+          "rows": 6392
+        },
+        "submission_sha256": "f18f19303f56330d652dbbe5d82e9f5a9978f24e871f63e3c9c795998ccafae2",
+        "training_finished": true
+      },
+      {
+        "model": "efficientnet_v2_s",
+        "epoch": 16,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "126c70aaa281815e2ea8ada1abc4118fe236585e44c682d35f134eab711f02af",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8731226533166458,
+          "macro_f1": 0.8728123992049469,
+          "log_loss": 0.5979109662471934,
+          "unique_image_group_accuracy": 0.8730829420970266,
+          "correct": 5581,
+          "rows": 6392
+        },
+        "submission_sha256": "6ab9fc6bcf8623246486439e14e5bb874debe8c31972cfd4f2f699675f926c7a",
+        "training_finished": true
+      }
+    ]
+  }
+}

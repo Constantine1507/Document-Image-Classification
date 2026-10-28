@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "python_files": 28,
+  "documented_definitions": 119,
+  "missing_docstrings": [],
+  "notebook_code_cells": 37,
+  "embedded_source_files": 24,
+  "archive_sha256": "1af2fc26eabea894bfec9dbb18884ee8678b510ace3ee783927cfd34fdccb758",
+  "largest_file_bytes": 1666914
+}

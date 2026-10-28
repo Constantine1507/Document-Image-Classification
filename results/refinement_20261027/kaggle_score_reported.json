@@ -1,0 +1,17 @@
+{
+  "model": "ensemble_geometric_equal",
+  "score": 0.88582,
+  "metric": "categorical_accuracy",
+  "reported_on": "2026-10-28",
+  "source": "reported by repository owner in the project conversation",
+  "independently_verified": false,
+  "leaderboard_split": null,
+  "rank": null,
+  "submission_path": "submissions/submission_geometric_088582.csv",
+  "submission_sha256": "812d1b43a69b2cfc5875f8930a38db54b6e33c2db259dc4252a873882d35afa1",
+  "file_association": "latest primary submission.csv supplied in the preceding project response",
+  "previous_reported_score": 0.88456,
+  "absolute_score_gain": 0.00126,
+  "validation_accuracy": 0.8853254067584481,
+  "validation_is_kaggle_score": false
+}

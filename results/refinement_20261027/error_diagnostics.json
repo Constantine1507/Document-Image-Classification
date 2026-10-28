@@ -1,0 +1,9 @@
+{
+  "model_agreement_rows": 5727,
+  "model_agreement_wrong": 378,
+  "model_disagreement_rows": 665,
+  "model_disagreement_baseline_correct": 303,
+  "baseline_correct_when_both_top1_wrong": 3,
+  "high_confidence_errors_ge_09": 229,
+  "very_high_confidence_errors_ge_099": 0
+}

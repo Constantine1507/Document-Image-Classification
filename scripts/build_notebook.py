@@ -36,6 +36,7 @@ Notebook ini menggantikan alur ResNet18 yang berulang dengan satu pipeline:
 - Semua source proyek disertakan; tidak perlu script tambahan dari Add Input.
 - PyTorch dan torchvision; bobot awal ImageNet-1K resmi, bukan model RVL-CDIP yang berpotensi bocor.
 - Run historis terarsip: ensemble validation accuracy 0,884230; skor Kaggle yang dilaporkan 0,88456. Notebook baru ini belum berisi hasil training baru.
+- Pembaruan 28 Oktober: tahap 6b membuat kandidat geometric mean 50:50. Skor 0,88582 adalah laporan untuk CSV historis terbaru, bukan skor otomatis run baru.
 
 **Langkah singkat:** aktifkan GPU → pastikan dataset gambar tersedia → sesuaikan sel pengaturan bila perlu → Run All.
 Internet diperlukan untuk download pertama bobot pretrained, kecuali file bobot sudah disediakan lokal.
@@ -98,7 +99,7 @@ PROJECT = Path(PROJECT).resolve()
 if str(PROJECT).startswith('/kaggle/input/'):
     raise ValueError('PROJECT harus berada di /kaggle/working, bukan input read-only.')
 PROJECT.mkdir(parents=True, exist_ok=True)
-for folder in ['src/docvision_v2', 'scripts', 'tests', 'configs', 'reports', 'data/splits', 'outputs', 'docs', 'results']:
+for folder in ['src/docvision_v2', 'src/docvision_calibration', 'scripts', 'tests', 'configs', 'reports', 'data/splits', 'outputs', 'docs', 'results']:
     (PROJECT / folder).mkdir(parents=True, exist_ok=True)
 os.chdir(PROJECT)
 required = {'torch': 'torch', 'torchvision': 'torchvision', 'numpy': 'numpy',
@@ -124,6 +125,8 @@ manual, simpan perubahan sebelum menjalankan kembali bagian ini. Resume memverif
 ''')
 for name in ['src/docvision_v2/__init__.py', 'src/docvision_v2/utils.py', 'src/docvision_v2/data.py', 'src/docvision_v2/models.py', 'src/docvision_v2/engine.py', 'src/docvision_v2/evaluate.py', 'src/docvision_v2/runtime.py', 'src/docvision_v2/reporting.py', 'scripts/run.py', 'tests/smoke_test.py', 'tests/runtime_test.py', 'requirements.txt', 'README.md', 'docs/METHODOLOGY.md', 'docs/TROUBLESHOOTING.md', 'docs/ASSIGNMENT_COMPLIANCE.md', 'configs/convnext_tiny.json', 'configs/efficientnet_v2_s.json']:
     code(f'%%writefile {name}\n' + (ROOT / name).read_text(), 'project-source')
+for name in ['src/docvision_calibration/__init__.py', 'src/docvision_calibration/data.py', 'src/docvision_calibration/power.py', 'src/docvision_calibration/submission.py', 'scripts/ensemble_geometric.py', 'docs/PIPELINE_FLOW.md']:
+    code(f'%%writefile {name}\n' + (ROOT / name).read_text(), 'project-source')
 code('''
 import json
 import hashlib
@@ -134,7 +137,7 @@ from IPython.display import display, FileLink, Image as DisplayImage
 sys.path.insert(0, str(PROJECT / 'src'))
 importlib.invalidate_caches()
 for module_name in list(sys.modules):
-    if module_name == 'docvision_v2' or module_name.startswith('docvision_v2.'):
+    if module_name in {'docvision_v2', 'docvision_calibration'} or module_name.startswith(('docvision_v2.', 'docvision_calibration.')):
         del sys.modules[module_name]
 
 from docvision_v2.data import find_data_root, prepare_data, load_prepared
@@ -282,9 +285,55 @@ display(final_submission.head())
 print('Submission valid:', final_submission.shape)
 ''')
 markdown('''
+### 6b. Submission geometric mean 50:50
+
+Tahap tambahan ini memakai probabilitas kedua CNN, menyelaraskan ID, lalu
+menghasilkan `submission_geometric.csv` secara terpisah. CSV dari tahap 6 tetap
+tersedia. Tahap ini memerlukan kedua arsitektur dengan 16 kelas kompetisi.
+Metrik pada run ini dihitung ulang; skor Kaggle historis 0,88582 tidak disalin.
+''')
+code('''
+GEOMETRIC_SUBMISSION = None
+evaluation_by_model = {
+    json.loads((path / 'metadata.json').read_text())['model']: path
+    for path in EVALUATION_DIRS
+}
+if EXPECTED_CLASSES == 16 and {'convnext_tiny', 'efficientnet_v2_s'} <= set(evaluation_by_model):
+    import numpy as np
+    from docvision_calibration.submission import export_geometric_submission
+    from docvision_calibration.data import align
+    from docvision_calibration.power import PowerMeanPool
+    from docvision_v2.engine import metric_dict
+
+    conv_eval = evaluation_by_model['convnext_tiny']
+    eff_eval = evaluation_by_model['efficientnet_v2_s']
+    GEOMETRIC_SUBMISSION = PROJECT / 'submission_geometric.csv'
+    geometric_manifest = export_geometric_submission(
+        conv_eval / 'test.npz', eff_eval / 'test.npz',
+        PROJECT / 'data/splits/sample_submission.csv', GEOMETRIC_SUBMISSION,
+    )
+    aligned_validation = np.stack([
+        align(path / 'validation.npz', valid_frame.id, valid_frame.label.to_numpy())
+        for path in [conv_eval, eff_eval]
+    ], axis=1)
+    with torch.inference_mode():
+        geometric_validation = PowerMeanPool()(torch.as_tensor(aligned_validation, dtype=torch.float64)).numpy()
+    geometric_metrics = metric_dict(valid_frame.label.to_numpy(), geometric_validation)
+    geometric_manifest.update(validation_metrics=geometric_metrics,
+                              fingerprint=manifest['fingerprint'],
+                              validation_scope='shared selection holdout; not a Kaggle score')
+    GEOMETRIC_SUBMISSION.with_suffix('.manifest.json').write_text(json.dumps(geometric_manifest, indent=2))
+    (PROJECT / 'outputs/comparison/geometric_metrics.json').write_text(json.dumps(geometric_metrics, indent=2))
+    display(pd.DataFrame([{'model': 'ensemble_geometric_equal', **geometric_metrics}]))
+    print('Geometric submission:', GEOMETRIC_SUBMISSION)
+else:
+    print('Geometric kompetisi dilewati: memerlukan kedua arsitektur dan 16 kelas.')
+''', 'geometric-ensemble')
+markdown('''
 ### 7. File output dan paket review
 
 `submission.csv` adalah pilihan berdasarkan validasi. CSV setiap model juga tersedia.
+`submission_geometric.csv` adalah kandidat pooling tambahan dari tahap 6b.
 `docvision_v2_review.zip` berisi log, metrik, probabilitas, audit, dan diagnostik;
 tidak memasukkan dataset atau checkpoint besar. Simpan versi notebook agar checkpoint
 tetap tersedia. Jangan menganggap skor validasi sebagai skor public/private Kaggle.
@@ -300,6 +349,8 @@ code('''
 review_zip = export_review(PROJECT)
 artifact_root = Path('/kaggle/working') if Path('/kaggle/working').is_dir() else PROJECT
 artifacts = [PROJECT / 'submission.csv', PROJECT / 'submission_manifest.json', review_zip, github_zip]
+if GEOMETRIC_SUBMISSION is not None:
+    artifacts += [GEOMETRIC_SUBMISSION, GEOMETRIC_SUBMISSION.with_suffix('.manifest.json')]
 artifacts += sorted((PROJECT / 'outputs/comparison').glob('submission_*.csv'))
 for source in artifacts:
     target = artifact_root / source.name
@@ -346,7 +397,9 @@ notebook = nbf.v4.new_notebook(cells=cells)
 notebook.metadata = {
     'kernelspec': {'display_name':'Python 3','language':'python','name':'python3'},
     'language_info': {'name':'python','version':'3.12'},
-    'docvision': {'version':'2.2.0','competition_training_executed':False,
+    'docvision': {'version':'2.2.1','competition_training_executed':False,
+                 'refinement':'geometric_mean_50_50',
+                 'refinement_validation_report':'validation/refinement_20261028/notebook_geometric_check.json',
                  'validation_report':'validation/notebook_smoke.json'},
 }
 for index, cell in enumerate(notebook.cells):

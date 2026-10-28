@@ -20,6 +20,8 @@ jobs:
           python -m pip install -r requirements-dev.txt
       - name: Check source, documentation, notebook, and provenance
         run: python scripts/validate_repository.py
+      - name: Verify archived and latest submission identity
+        run: python scripts/verify_submissions.py
       - name: Check AMP policy and CPU behavior
         run: python tests/runtime_test.py
       - name: Test data, training, resume, ensemble, and both backbones

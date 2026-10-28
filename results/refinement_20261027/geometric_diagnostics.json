@@ -1,0 +1,53 @@
+{
+  "geometric": {
+    "accuracy": 0.8853254067584481,
+    "correct": 5659,
+    "macro_f1": 0.8850737411423207,
+    "log_loss": 0.48377859590273153
+  },
+  "baseline": {
+    "accuracy": 0.8842302878598248,
+    "correct": 5652,
+    "macro_f1": 0.8840217374922876,
+    "log_loss": 0.48708320011150646
+  },
+  "paired": {
+    "recovered": 27,
+    "broken": 20,
+    "net_correct_gain": 7,
+    "still_wrong": 713,
+    "descriptive_95pct_delta_interval": [
+      -0.0009388202159286497,
+      0.0031289111389236545
+    ],
+    "mcnemar_exact_p_descriptive": 0.38169339766321275,
+    "inference_limitation": "Descriptive only; shared base-model selection and overlapping CV training sets limit formal inference."
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "baseline_accuracy": 0.8780297107114934,
+      "geometric_accuracy": 0.8819390148553558
+    },
+    {
+      "fold": 1,
+      "baseline_accuracy": 0.8858483189992181,
+      "geometric_accuracy": 0.8811571540265832
+    },
+    {
+      "fold": 2,
+      "baseline_accuracy": 0.8779342723004695,
+      "geometric_accuracy": 0.8779342723004695
+    },
+    {
+      "fold": 3,
+      "baseline_accuracy": 0.8888888888888888,
+      "geometric_accuracy": 0.8943661971830986
+    },
+    {
+      "fold": 4,
+      "baseline_accuracy": 0.8904538341158059,
+      "geometric_accuracy": 0.8912363067292645
+    }
+  ]
+}

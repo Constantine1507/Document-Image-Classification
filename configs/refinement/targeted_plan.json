@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "outer_seed": 20261028,
+  "minimum_gain_for_selection": 0.001,
+  "methods": [
+    {"name": "baseline_equal", "method": "baseline"},
+    {"name": "geometric_equal", "method": "geometric"},
+    {"name": "uncertain_classwise", "method": "classwise", "regularization": 0.1, "uncertainty_weighted": true},
+    {"name": "uncertain_linear", "method": "linear", "regularization": 0.1, "uncertainty_weighted": true},
+    {"name": "margin_bias_025", "method": "margin_bias", "tau": 0.25, "epochs": 150},
+    {"name": "margin_bias_075", "method": "margin_bias", "tau": 0.75, "epochs": 150},
+    {"name": "margin_classwise", "method": "margin_classwise", "tau": 0.5, "epochs": 150, "regularization": 0.1},
+    {"name": "pair_gate_001", "method": "pair_gate", "regularization": 0.01},
+    {"name": "pair_gate_01", "method": "pair_gate", "regularization": 0.1},
+    {"name": "pair_gate_1", "method": "pair_gate", "regularization": 1.0}
+  ],
+  "scope": "Second exploratory round: nested group CV of probability correction after first-round diagnostics. Neither round is independent full-pipeline OOF or Kaggle test accuracy; base CNNs were selected on these validation images.",
+  "test_policy": "No test target labels or quotas. Only frozen class probabilities are model inputs.",
+  "selection_policy": "Same inner selection and outer promotion gate as round one. This round was motivated by NLL improvements without accuracy gains: uncertainty weighting, bounded smooth classification loss, and disagreement selection target different mechanisms. All failures remain reported."
+}

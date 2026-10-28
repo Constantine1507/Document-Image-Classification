@@ -1,0 +1,122 @@
+{
+  "baseline_validation": {
+    "accuracy": 0.8842302878598248,
+    "correct": 5652,
+    "macro_f1": 0.8840217374922876,
+    "log_loss": 0.48708320011150646
+  },
+  "nested_meta_validation": {
+    "accuracy": 0.8829787234042553,
+    "correct": 5644,
+    "macro_f1": 0.8827078119058067,
+    "log_loss": 0.48513391273578305
+  },
+  "accuracy_gain": -0.0012515644555695093,
+  "paired_diagnostics": {
+    "recovered": 11,
+    "broken": 19,
+    "net_correct_gain": -8,
+    "still_wrong": 729,
+    "descriptive_95pct_delta_interval": [
+      -0.002972465581977472,
+      0.0003128923378444617
+    ],
+    "mcnemar_exact_p_descriptive": 0.20048842206597334,
+    "inference_limitation": "Descriptive only; shared base-model selection and overlapping CV training sets limit formal inference."
+  },
+  "nondecreasing_outer_folds": 3,
+  "outer_folds": 5,
+  "selected_methods": [
+    "baseline_equal",
+    "geometric_equal",
+    "geometric_equal",
+    "baseline_equal",
+    "linear_residual_blend"
+  ],
+  "promotion_gate_passed": false,
+  "submission_policy": "unchanged original equal ensemble",
+  "changed_test_predictions": 0,
+  "submission_rows": 7994,
+  "submission_sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+  "reported_baseline_kaggle_score": 0.88456,
+  "new_kaggle_score": null,
+  "target_above_0_90_on_nested_validation": false,
+  "scope": "Nested group cross-validation of probability correction only; CNN checkpoints were previously selected on these validation images. This is not unbiased full-pipeline OOF or Kaggle test accuracy.",
+  "test_policy": "Use test probabilities only for inference and ID alignment. Never use test labels, test class quotas, filenames, pixel hashes, or source metadata as features.",
+  "elapsed_seconds": 34.8674409639998,
+  "data_provenance": {
+    "archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+    "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+    "class_names": [
+      "advertisement",
+      "budget",
+      "email",
+      "file_folder",
+      "form",
+      "handwritten",
+      "invoice",
+      "letter",
+      "memo",
+      "news_article",
+      "presentation",
+      "questionnaire",
+      "resume",
+      "scientific_publication",
+      "scientific_report",
+      "specification"
+    ],
+    "member_names": [
+      "convnext_tiny",
+      "efficientnet_v2_s"
+    ],
+    "validation_rows": 6392,
+    "validation_unique_groups": 6390,
+    "test_rows": 7994,
+    "baseline_correct": 5652,
+    "baseline_accuracy": 0.8842302878598248,
+    "baseline_submission_sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+    "backbone_metadata": [
+      {
+        "model": "convnext_tiny",
+        "epoch": 18,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "c303dcd191b8e6a21b85c782fd0f29d3656d7a2e58d1b127dac7ab968cb34cdf",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8743742177722152,
+          "macro_f1": 0.8742072464678626,
+          "log_loss": 0.5667495460092473,
+          "unique_image_group_accuracy": 0.874491392801252,
+          "correct": 5589,
+          "rows": 6392
+        },
+        "submission_sha256": "f18f19303f56330d652dbbe5d82e9f5a9978f24e871f63e3c9c795998ccafae2",
+        "training_finished": true
+      },
+      {
+        "model": "efficientnet_v2_s",
+        "epoch": 16,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "126c70aaa281815e2ea8ada1abc4118fe236585e44c682d35f134eab711f02af",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8731226533166458,
+          "macro_f1": 0.8728123992049469,
+          "log_loss": 0.5979109662471934,
+          "unique_image_group_accuracy": 0.8730829420970266,
+          "correct": 5581,
+          "rows": 6392
+        },
+        "submission_sha256": "6ab9fc6bcf8623246486439e14e5bb874debe8c31972cfd4f2f699675f926c7a",
+        "training_finished": true
+      }
+    ]
+  },
+  "torch": "2.5.1+cpu"
+}

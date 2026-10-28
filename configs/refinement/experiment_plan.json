@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "outer_seed": 20261027,
+  "minimum_gain_for_selection": 0.001,
+  "methods": [
+    {"name": "baseline_equal", "method": "baseline"},
+    {"name": "geometric_equal", "method": "geometric"},
+    {"name": "convnext_only", "method": "convnext"},
+    {"name": "efficientnet_only", "method": "efficientnet"},
+    {"name": "temperature_weight", "method": "scalar"},
+    {"name": "temperature_weight_bias", "method": "biased"},
+    {"name": "classwise_mix_01", "method": "classwise", "regularization": 0.1},
+    {"name": "classwise_mix_1", "method": "classwise", "regularization": 1.0},
+    {"name": "linear_residual_003", "method": "linear", "regularization": 0.03},
+    {"name": "linear_residual_01", "method": "linear", "regularization": 0.1},
+    {"name": "linear_residual_03", "method": "linear", "regularization": 0.3},
+    {"name": "linear_residual_blend", "method": "linear", "regularization": 0.1, "baseline_blend": 0.5},
+    {"name": "neural_residual_40", "method": "mlp", "regularization": 0.001, "hidden": 32, "dropout": 0.3, "epochs": 40},
+    {"name": "neural_residual_120", "method": "mlp", "regularization": 0.001, "hidden": 32, "dropout": 0.3, "epochs": 120},
+    {"name": "decision_bias", "method": "accuracy_bias", "decision_penalty": 0.002}
+  ],
+  "scope": "Nested group cross-validation of probability correction only; CNN checkpoints were previously selected on these validation images. This is not unbiased full-pipeline OOF or Kaggle test accuracy.",
+  "test_policy": "Use test probabilities only for inference and ID alignment. Never use test labels, test class quotas, filenames, pixel hashes, or source metadata as features.",
+  "selection_policy": "Within each outer fit partition, choose by inner OOF accuracy then log loss. Fall back to baseline unless inner gain is at least 0.001. Evaluate each outer assessment row exactly once. Keep original submission if aggregate nested gain is below 0.001 or fewer than three outer folds are non-decreasing. Final candidate is the probability average of the five selected outer-fit correctors; no new leaderboard score is claimed."
+}

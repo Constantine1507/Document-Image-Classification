@@ -1,0 +1,143 @@
+{
+  "primary": {
+    "file": "submission.csv",
+    "weight_convnext": 0.5,
+    "weight_efficientnet": 0.5,
+    "power": 0.0,
+    "validation_metrics": {
+      "accuracy": 0.8853254067584481,
+      "correct": 5659,
+      "macro_f1": 0.8850737411423207,
+      "log_loss": 0.48377859590273153
+    },
+    "paired": {
+      "recovered": 27,
+      "broken": 20,
+      "net_correct_gain": 7,
+      "still_wrong": 713,
+      "descriptive_95pct_delta_interval": [
+        -0.0009388202159286497,
+        0.0031289111389236545
+      ],
+      "mcnemar_exact_p_descriptive": 0.38169339766321275,
+      "inference_limitation": "Descriptive only; shared base-model selection and overlapping CV training sets limit formal inference."
+    },
+    "changed_test_labels": 97,
+    "rows": 7994,
+    "sha256": "812d1b43a69b2cfc5875f8930a38db54b6e33c2db259dc4252a873882d35afa1",
+    "status": "Primary fixed geometric mean; selected after exploratory comparison, not new Kaggle accuracy",
+    "kaggle_score": null
+  },
+  "exploratory": {
+    "file": "submission_exploratory_power.csv",
+    "weight_convnext": 0.35,
+    "weight_efficientnet": 0.65,
+    "power": -1.0,
+    "validation_metrics": {
+      "accuracy": 0.8873591989987485,
+      "correct": 5672,
+      "macro_f1": 0.8871055694773309,
+      "log_loss": 0.5151589673483344
+    },
+    "paired": {
+      "recovered": 43,
+      "broken": 23,
+      "net_correct_gain": 20,
+      "still_wrong": 697,
+      "descriptive_95pct_delta_interval": [
+        0.0006257822277847309,
+        0.005628583855054881
+      ],
+      "mcnemar_exact_p_descriptive": 0.01865726035402101,
+      "inference_limitation": "Descriptive only; shared base-model selection and overlapping CV training sets limit formal inference."
+    },
+    "changed_test_labels": 145,
+    "rows": 7994,
+    "sha256": "85340302eb9b82aa32641df60ef56ca2f679e3986057da7d0f988f8c259cf3eb",
+    "status": "Exploratory parameters selected using the whole validation set; score is optimistic selection accuracy",
+    "kaggle_score": null
+  },
+  "baseline_validation": {
+    "accuracy": 0.8842302878598248,
+    "correct": 5652,
+    "macro_f1": 0.8840217374922876,
+    "log_loss": 0.4870832009205068
+  },
+  "reported_baseline_kaggle_score": 0.88456,
+  "data_provenance": {
+    "archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+    "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+    "class_names": [
+      "advertisement",
+      "budget",
+      "email",
+      "file_folder",
+      "form",
+      "handwritten",
+      "invoice",
+      "letter",
+      "memo",
+      "news_article",
+      "presentation",
+      "questionnaire",
+      "resume",
+      "scientific_publication",
+      "scientific_report",
+      "specification"
+    ],
+    "member_names": [
+      "convnext_tiny",
+      "efficientnet_v2_s"
+    ],
+    "validation_rows": 6392,
+    "validation_unique_groups": 6390,
+    "test_rows": 7994,
+    "baseline_correct": 5652,
+    "baseline_accuracy": 0.8842302878598248,
+    "baseline_submission_sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+    "backbone_metadata": [
+      {
+        "model": "convnext_tiny",
+        "epoch": 18,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "c303dcd191b8e6a21b85c782fd0f29d3656d7a2e58d1b127dac7ab968cb34cdf",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8743742177722152,
+          "macro_f1": 0.8742072464678626,
+          "log_loss": 0.5667495460092473,
+          "unique_image_group_accuracy": 0.874491392801252,
+          "correct": 5589,
+          "rows": 6392
+        },
+        "submission_sha256": "f18f19303f56330d652dbbe5d82e9f5a9978f24e871f63e3c9c795998ccafae2",
+        "training_finished": true
+      },
+      {
+        "model": "efficientnet_v2_s",
+        "epoch": 16,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "126c70aaa281815e2ea8ada1abc4118fe236585e44c682d35f134eab711f02af",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8731226533166458,
+          "macro_f1": 0.8728123992049469,
+          "log_loss": 0.5979109662471934,
+          "unique_image_group_accuracy": 0.8730829420970266,
+          "correct": 5581,
+          "rows": 6392
+        },
+        "submission_sha256": "6ab9fc6bcf8623246486439e14e5bb874debe8c31972cfd4f2f699675f926c7a",
+        "training_finished": true
+      }
+    ]
+  },
+  "target_above_0_90_achieved": false,
+  "choice_reason": "Fixed 50:50 geometric pooling has 5659 correct validation labels and lower log loss than the original. Learned nested selectors failed their promotion gate. Global grid selection has only 5658 honest cross-fitted correct labels, despite 5672 at its in-sample optimum. The simple primary candidate avoids additional fitted parameters; uncertainty remains."
+}

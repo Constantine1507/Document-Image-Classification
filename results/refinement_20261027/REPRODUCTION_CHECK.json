@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+  "files": [
+    {
+      "file": "submission.csv",
+      "rows": 7994,
+      "sha256": "812d1b43a69b2cfc5875f8930a38db54b6e33c2db259dc4252a873882d35afa1",
+      "changed_test_labels": 97,
+      "independent_labels_match": true,
+      "maximum_probability_difference": 5.551115123125783e-16,
+      "validation_correct": 5659,
+      "validation_accuracy": 0.8853254067584481
+    },
+    {
+      "file": "submission_exploratory_power.csv",
+      "rows": 7994,
+      "sha256": "85340302eb9b82aa32641df60ef56ca2f679e3986057da7d0f988f8c259cf3eb",
+      "changed_test_labels": 145,
+      "independent_labels_match": true,
+      "maximum_probability_difference": 6.661338147750939e-16,
+      "validation_correct": 5672,
+      "validation_accuracy": 0.8873591989987485
+    }
+  ],
+  "compiled_source_files": 10,
+  "new_kaggle_score": null,
+  "test_accuracy_measured": false,
+  "verification_method": "Independent NumPy formulas on original archived probabilities; no test targets."
+}

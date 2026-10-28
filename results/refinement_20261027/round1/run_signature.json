@@ -1,0 +1,170 @@
+{
+  "data": {
+    "archive_sha256": "5413541af29b368114a0912e1e7bac7cdf04ff9bf85153c5812e3dbd50c68222",
+    "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+    "class_names": [
+      "advertisement",
+      "budget",
+      "email",
+      "file_folder",
+      "form",
+      "handwritten",
+      "invoice",
+      "letter",
+      "memo",
+      "news_article",
+      "presentation",
+      "questionnaire",
+      "resume",
+      "scientific_publication",
+      "scientific_report",
+      "specification"
+    ],
+    "member_names": [
+      "convnext_tiny",
+      "efficientnet_v2_s"
+    ],
+    "validation_rows": 6392,
+    "validation_unique_groups": 6390,
+    "test_rows": 7994,
+    "baseline_correct": 5652,
+    "baseline_accuracy": 0.8842302878598248,
+    "baseline_submission_sha256": "854d620cf37cfe0ac23106739eac3f6bb41f24ce18b14d7fbd4dc1c5e3025a76",
+    "backbone_metadata": [
+      {
+        "model": "convnext_tiny",
+        "epoch": 18,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "c303dcd191b8e6a21b85c782fd0f29d3656d7a2e58d1b127dac7ab968cb34cdf",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8743742177722152,
+          "macro_f1": 0.8742072464678626,
+          "log_loss": 0.5667495460092473,
+          "unique_image_group_accuracy": 0.874491392801252,
+          "correct": 5589,
+          "rows": 6392
+        },
+        "submission_sha256": "f18f19303f56330d652dbbe5d82e9f5a9978f24e871f63e3c9c795998ccafae2",
+        "training_finished": true
+      },
+      {
+        "model": "efficientnet_v2_s",
+        "epoch": 16,
+        "weight_type": "EMA",
+        "checkpoint_sha256": "126c70aaa281815e2ea8ada1abc4118fe236585e44c682d35f134eab711f02af",
+        "fingerprint": "a8b2bd8b4b5f8beb4d185ee53b459675f9f6880ca8da3042dc62d7ecb566cc1a",
+        "selected_sizes": [
+          384
+        ],
+        "metrics": {
+          "accuracy": 0.8731226533166458,
+          "macro_f1": 0.8728123992049469,
+          "log_loss": 0.5979109662471934,
+          "unique_image_group_accuracy": 0.8730829420970266,
+          "correct": 5581,
+          "rows": 6392
+        },
+        "submission_sha256": "6ab9fc6bcf8623246486439e14e5bb874debe8c31972cfd4f2f699675f926c7a",
+        "training_finished": true
+      }
+    ]
+  },
+  "plan": {
+    "schema_version": 1,
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "outer_seed": 20261027,
+    "minimum_gain_for_selection": 0.001,
+    "methods": [
+      {
+        "name": "baseline_equal",
+        "method": "baseline"
+      },
+      {
+        "name": "geometric_equal",
+        "method": "geometric"
+      },
+      {
+        "name": "convnext_only",
+        "method": "convnext"
+      },
+      {
+        "name": "efficientnet_only",
+        "method": "efficientnet"
+      },
+      {
+        "name": "temperature_weight",
+        "method": "scalar"
+      },
+      {
+        "name": "temperature_weight_bias",
+        "method": "biased"
+      },
+      {
+        "name": "classwise_mix_01",
+        "method": "classwise",
+        "regularization": 0.1
+      },
+      {
+        "name": "classwise_mix_1",
+        "method": "classwise",
+        "regularization": 1.0
+      },
+      {
+        "name": "linear_residual_003",
+        "method": "linear",
+        "regularization": 0.03
+      },
+      {
+        "name": "linear_residual_01",
+        "method": "linear",
+        "regularization": 0.1
+      },
+      {
+        "name": "linear_residual_03",
+        "method": "linear",
+        "regularization": 0.3
+      },
+      {
+        "name": "linear_residual_blend",
+        "method": "linear",
+        "regularization": 0.1,
+        "baseline_blend": 0.5
+      },
+      {
+        "name": "neural_residual_40",
+        "method": "mlp",
+        "regularization": 0.001,
+        "hidden": 32,
+        "dropout": 0.3,
+        "epochs": 40
+      },
+      {
+        "name": "neural_residual_120",
+        "method": "mlp",
+        "regularization": 0.001,
+        "hidden": 32,
+        "dropout": 0.3,
+        "epochs": 120
+      },
+      {
+        "name": "decision_bias",
+        "method": "accuracy_bias",
+        "decision_penalty": 0.002
+      }
+    ],
+    "scope": "Nested group cross-validation of probability correction only; CNN checkpoints were previously selected on these validation images. This is not unbiased full-pipeline OOF or Kaggle test accuracy.",
+    "test_policy": "Use test probabilities only for inference and ID alignment. Never use test labels, test class quotas, filenames, pixel hashes, or source metadata as features.",
+    "selection_policy": "Within each outer fit partition, choose by inner OOF accuracy then log loss. Fall back to baseline unless inner gain is at least 0.001. Evaluate each outer assessment row exactly once. Keep original submission if aggregate nested gain is below 0.001 or fewer than three outer folds are non-decreasing. Final candidate is the probability average of the five selected outer-fit correctors; no new leaderboard score is claimed."
+  },
+  "source_sha256": {
+    "__init__.py": "a4d887e4851664024b73fc9e9e1807bdb24d1570f4f848db90964c85200d7947",
+    "data.py": "cbb356a93ddb8722a17fc89e05b5d5f6071bce768522242533fd564568f75d96",
+    "models.py": "62aa2bb7965159fccde5078d7748ef47b702cea3c09ea061883b9ac67e09ff73",
+    "validation.py": "1b8f46be24f1802cd8bf49570327af1b89fd1ec5f5c77fc6309471e1cd010231"
+  }
+}
